@@ -2,7 +2,7 @@
  
 # Lins - MD Apis Free
 <p align="center">
-<a href="#"><img title="LINS APIs" src="https://img.shields.io/badge/LINS APIs-blue?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
+<a href="https://whatsapp.com/channel/0029VaeQHirJ93waiykxjF2L"><img title="LINS APIs" src="https://img.shields.io/badge/LINS APIs-blue?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
 </p>
 <p align="center">
 <a href="https://github.com/Linsofc"><img title="Author" src="https://img.shields.io/badge/Author-LINS OFFICIAL-orange.svg?style=for-the-badge&logo=github"></a>
@@ -34,3 +34,19 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ðŸ
 1. Clone repository ini:
    ```bash
    git clone https://github.com/Linsofc/Api-free-Lins-MD.git
+
+2. Masuk ke folder proyek:
+   ```bash
+   cd Api-free-Lins-MD
+
+3. Install dependencies:
+   ```bash
+   npm install
+
+4. Jalankan script:
+   ```bash
+   npm start
+
+<p>
+ Â© Lins MD
+</p>
