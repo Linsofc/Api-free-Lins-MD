@@ -63,6 +63,7 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ğŸ
 4. Isi codingan file index.js
    ```bash
    const fetch = require("node-fetch")
+   // Contoh Kisah Nabi
    async function kisahNabi(nabi) {
     try {
         // Fetch data dari URL
@@ -90,10 +91,10 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ğŸ
         // Tangani error
         return `Terjadi kesalahan: ${error.message}`;
     }
-}
-
-let data = kisahNabi("adam")
-console.log(data)
+    }
+   
+   let data = kisahNabi("adam")
+   console.log(data)
    
 <p>
  Â© Lins MD
