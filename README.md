@@ -23,14 +23,16 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error �
 
 ---
 
-## ✨ Fitur
-- Mudah digunakan.
-- Gratis tanpa batasan API calls.
-- Mendukung berbagai kategori data.
+## Fitur
+- Games
+- Islamic
+- Random
+- Walpaper
+- dll malas ngetik 😒
 
 ---
 
-## 🚀 Cara Menggunakan
+## Cara Menggunakan
 1. Clone repository ini:
    ```bash
    git clone https://github.com/Linsofc/Api-free-Lins-MD.git
