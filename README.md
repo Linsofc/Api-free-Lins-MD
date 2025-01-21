@@ -1,6 +1,6 @@
 <div align="center">
  
-# Lins - MD Apis Free
+# Api Free Lins-MD
 <p align="center">
 <a href="https://whatsapp.com/channel/0029VaeQHirJ93waiykxjF2L"><img title="LINS APIs" src="https://img.shields.io/badge/LINS APIs-blue?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
 </p>
@@ -32,23 +32,69 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ðŸ
 
 ---
 
-## Cara Menggunakan
+## Cara Penggunaan
 1. Clone repository ini:
    ```bash
    git clone https://github.com/Linsofc/Api-free-Lins-MD.git
 
-2. Masuk ke folder proyek:
+2. Masuk ke directory db
    ```bash
    cd Api-free-Lins-MD
 
-3. Install dependencies:
+3. Copy semua database
    ```bash
-   npm install
+   cp -r db $HOME
+   
+4. Pindah ke database kalian
 
-4. Jalankan script:
+## Cara Menggunakan fetch
+1. Initialisasi package
    ```bash
-   npm start
+   npm init -y
 
+2. Install modul fetch
+   ```bash
+   npm i node-fetch
+
+3. Membuat file baru
+   ```bash
+   touch index.js
+
+4. Isi codingan file index.js
+   ```bash
+   const fetch = require("node-fetch")
+   async function kisahNabi(nabi) {
+    try {
+        // Fetch data dari URL
+        let response = await fetch(
+            `https://raw.githubusercontent.com/Linsofc/Api-free-Lins-MD/main/db/islamic/kisahNabi/${nabi}.json`
+        );
+
+        // Periksa apakah response sukses
+        if (!response.ok) {
+            throw new Error(`Gagal mengambil data untuk Nabi ${nabi}: ${response.statusText}`);
+        }
+
+        // Parse JSON
+        let kisah = await response.json();
+
+        // Format hasil
+        let hasil = `Nabi: ${kisah.name}\n` +
+                    `Tanggal Lahir: ${kisah.thn_kelahiran}\n` +
+                    `Tempat Lahir: ${kisah.tmp}\n` +
+                    `Usia: ${kisah.usia}\n` +
+                    `Kisah: ${kisah.description}`;
+
+        return hasil;
+    } catch (error) {
+        // Tangani error
+        return `Terjadi kesalahan: ${error.message}`;
+    }
+}
+
+let data = kisahNabi("adam")
+console.log(data)
+   
 <p>
  Â© Lins MD
 </p>
