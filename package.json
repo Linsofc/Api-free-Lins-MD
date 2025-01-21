@@ -1,0 +1,23 @@
+{
+    "name": "Lins-MD WhatsApp Bot",
+    "version": "3.8.1",
+    "description": "Apis free get json for whatsapp bot",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Linsofc/Api-free-Lins-MD.git"
+    },
+    "keywords": ["nodejs", "github"],
+    "author": "Lins Officiall",
+    "license": "MIT",
+    "dependencies": {
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
+}
