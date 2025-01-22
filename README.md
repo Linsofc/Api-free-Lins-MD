@@ -33,8 +33,13 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ðŸ
 ---
 
 # Source Free
-```bash
-ok
+1. Install git
+  ```bash
+  pkg i git
+2. Clone repository
+  ```bash
+  git clone https://github.com/Linsofc/Api-free-Lins-MD.git
+
 <p>
  Â© Lins MD
 </p>
