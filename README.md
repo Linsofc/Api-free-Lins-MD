@@ -18,7 +18,6 @@
    <a href="https://instagram.com/rijalsavior"><img height="30" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"></a>
 </P>
 
-Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error 😅.
 </div>
 
 ---
