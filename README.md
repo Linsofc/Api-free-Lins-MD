@@ -32,47 +32,9 @@ Hati-hati saat menggunakan API ini, salah implementasi bisa menyebabkan error ðŸ
 
 ---
 
-## Cara Penggunaan
-1. Clone repository ini:
-   ```bash
-   git clone https://github.com/Linsofc/Api-free-Lins-MD.git
-
-2. Masuk ke directory db
-   ```bash
-   cd Api-free-Lins-MD
-
-3. Copy semua database
-   ```bash
-   cp -r db $HOME
-   
-4. Pindah ke database kalian
-
-## Cara Menggunakan fetch
-1. Initialisasi package
-   ```bash
-   npm init -y
-
-2. Install modul fetch
-   ```bash
-   npm i node-fetch
-
-3. Membuat file baru
-   ```bash
-   touch index.js
-
-4. Isi codingan file index.js
-   ```bash
-   const fetch = require("node-fetch")
-   (async () => {
-    try {
-        const dataLinsMD = await fetch('https://raw.githubusercontent.com/Linsofc/Api-free-Lins-MD/main/db/games/asahotak.json');
-        const result = await dataLinsMD.json();
-        console.log(result);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-   })();
-   
+# Source Free
+```bash
+ok
 <p>
  Â© Lins MD
 </p>
