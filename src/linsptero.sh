@@ -9,11 +9,16 @@ if ! command -v expect &> /dev/null; then
     sudo apt update && sudo apt install expect -y
 fi
 
+# Simpan skrip installer ke file sementara
+install_script="/tmp/pterodactyl_installer.sh"
+curl -s https://pterodactyl-installer.se -o "$install_script"
+chmod +x "$install_script"
+
 # Menjalankan Expect untuk menangani input otomatis
 expect <<EOF
 set timeout -1
 
-spawn bash <(curl -s https://pterodactyl-installer.se)
+spawn bash $install_script
 
 expect "Input 0-6:"
 send "0\r"
@@ -78,3 +83,6 @@ send "y\r"
 
 expect eof
 EOF
+
+# Hapus file sementara setelah instalasi selesai
+rm -f "$install_script"
