@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Meminta input domain sebelum menjalankan instalasi
-read -p "Masukkan domain Anda: " domain
+read -p "Masukkan domain panel Anda: " domain
 
 # Periksa apakah Expect terinstal
 if ! command -v expect &> /dev/null; then
@@ -9,16 +9,11 @@ if ! command -v expect &> /dev/null; then
     sudo apt update && sudo apt install expect -y
 fi
 
-# Simpan skrip installer ke file sementara
-install_script="/tmp/pterodactyl_installer.sh"
-curl -s https://pterodactyl-installer.se -o "$install_script"
-chmod +x "$install_script"
-
 # Menjalankan Expect untuk menangani input otomatis
 expect <<EOF
 set timeout -1
 
-spawn bash $install_script
+spawn bash <(curl -s https://pterodactyl-installer.se)
 
 expect "Input 0-6:"
 send "0\r"
@@ -83,6 +78,3 @@ send "y\r"
 
 expect eof
 EOF
-
-# Hapus file sementara setelah instalasi selesai
-rm -f "$install_script"
