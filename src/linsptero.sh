@@ -1,19 +1,38 @@
 #!/bin/bash
 
-# Meminta input domain sebelum menjalankan instalasi
-read -p "Masukkan domain Anda: " domain
+# Fungsi untuk menampilkan pesan error dan keluar dari script
+error_exit() {
+    echo "[ERROR] $1"
+    exit 1
+}
 
-# Periksa apakah Expect terinstal
-if ! command -v expect &> /dev/null; then
-    echo "Expect belum terinstal. Menginstall sekarang..."
-    sudo apt update && sudo apt install expect -y
+# Meminta input domain sebelum menjalankan instalasi
+read -p "Silahkan masukkan domain Anda: " domain
+
+# Validasi domain tidak kosong
+if [[ -z "$domain" ]]; then
+    error_exit "Domain tidak boleh kosong!"
 fi
 
-# Menjalankan Expect untuk menangani input otomatis
+# Periksa apakah Expect terinstal, jika tidak, instal
+if ! command -v expect &> /dev/null; then
+    echo "[INFO] Expect belum terinstal. Menginstall sekarang..."
+    sudo apt update && sudo apt install -y expect || error_exit "Gagal menginstal Expect!"
+fi
+
+# Unduh script installer ke file sementara
+installer_file="/tmp/linsptero.sh"
+installer_url="https://raw.githubusercontent.com/Linsofc/Api-free-Lins-MD/main/src/linsptero.sh"
+
+echo "[INFO] Mengunduh skrip instalasi dari $installer_url..."
+curl -s "$installer_url" -o "$installer_file" || error_exit "Gagal mengunduh skrip instalasi!"
+chmod +x "$installer_file"
+
+# Jalankan Expect untuk input otomatis
 expect <<EOF
 set timeout -1
 
-spawn sh -c "bash <(curl -s https://raw.githubusercontent.com/Linsofc/Api-free-Lins-MD/main/src/linsptero.sh)"
+spawn bash "$installer_file"
 
 expect "Input 0-6:"
 send "0\r"
@@ -48,7 +67,6 @@ send "Last\r"
 expect "Password for the initial admin account:"
 send "psswd\r"
 
-# Menggunakan input domain yang diberikan pengguna
 expect "Set the FQDN of this panel (panel.example.com):"
 send "$domain\r"
 
@@ -78,3 +96,5 @@ send "y\r"
 
 expect eof
 EOF
+
+echo "[INFO] Instalasi selesai."
