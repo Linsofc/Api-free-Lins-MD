@@ -1,51 +1,74 @@
-#!/bin/bash
+#!/usr/bin/expect
 
-# Meminta input domain panel dari user
-read -p "Masukkan domain untuk panel (contoh: panel.example.com): " PANEL_DOMAIN
+set timeout -1
 
-# Konfigurasi Panel
-ADMIN_EMAIL="panel@linsofc.id"
-ADMIN_USER="admin"
-ADMIN_PASS="psswd"
-TIMEZONE="Asia/Jakarta"
+# Meminta input domain sebelum menjalankan instalasi
+puts -nonewline "Masukkan domain Anda: "
+flush stdout
+gets stdin domain
 
-# Update sistem dan instal dependensi
-echo "Memperbarui sistem dan menginstal dependensi..."
-apt update && apt upgrade -y
-apt install -y curl sudo zip unzip tar wget git cron socat net-tools dnsutils
+# Menjalankan installer
+spawn bash <(curl -s https://pterodactyl-installer.se)
 
-# Mengatur timezone
-echo "Mengatur timezone ke $TIMEZONE..."
-timedatectl set-timezone "$TIMEZONE"
+expect "Input 0-6:"
+send "0\r"
 
-# Menjalankan instalasi Pterodactyl
-echo "Menginstal Pterodactyl Panel..."
-bash <(curl -s https://pterodactyl-installer.se) <<EOF
-0
-$TIMEZONE
-$ADMIN_EMAIL
-$ADMIN_EMAIL
-$ADMIN_USER
-admin
-admin
-$ADMIN_PASS
-$PANEL_DOMAIN
-y
-y
-y
-y
-y
-yes
-A
-y
-EOF
+expect "Database name (panel):"
+send "\r"
 
-# Menampilkan informasi kredensial setelah instalasi selesai
-echo "======================================="
-echo " Instalasi Selesai! "
-echo "======================================="
-echo "URL Panel: https://$PANEL_DOMAIN"
-echo "Admin Email: $ADMIN_EMAIL"
-echo "Admin Username: $ADMIN_USER"
-echo "Admin Password: $ADMIN_PASS"
-echo "======================================="
+expect "Database username (pterodactyl):"
+send "\r"
+
+expect "Password (press enter to use randomly generated password):"
+send "\r"
+
+expect "Select timezone [Europe/Stockholm]:"
+send "Asia/Jakarta\r"
+
+expect "Provide the email address that will be used to configure Let's Encrypt and Pterodactyl:"
+send "admin@linsofc.com\r"
+
+expect "Email address for the initial admin account:"
+send "admin@linsofc.com\r"
+
+expect "Username for the initial admin account:"
+send "admin\r"
+
+expect "First name for the initial admin account:"
+send "First\r"
+
+expect "Last name for the initial admin account:"
+send "Last\r"
+
+expect "Password for the initial admin account:"
+send "psswd\r"
+
+# Menggunakan input domain yang diberikan pengguna
+expect "Set the FQDN of this panel (panel.example.com):"
+send "$domain\r"
+
+expect "Do you want to automatically configure UFW (firewall)? (y/N):"
+send "y\r"
+
+expect "Do you want to automatically configure HTTPS using Let's Encrypt? (y/N):"
+send "y\r"
+
+expect "I agree that this HTTPS request is performed (y/N):"
+send "y\r"
+
+expect "Proceed anyways (your install will be broken if you do not know what you are doing)? (y/N):"
+send "y\r"
+
+expect "Initial configuration completed. Continue with installation? (y/N):"
+send "y\r"
+
+expect "Enable sending anonymous telemetry data? (yes/no) [yes]:"
+send "yes\r"
+
+expect "(A)gree/(C)ancel:"
+send "A\r"
+
+expect "Still assume SSL? (y/N):"
+send "y\r"
+
+expect eof
