@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Meminta input domain sebelum menjalankan instalasi
-read -p "Masukkan domain panel Anda: " domain
+read -p "Masukkan domain Anda: " domain
 
 # Periksa apakah Expect terinstal
 if ! command -v expect &> /dev/null; then
@@ -13,7 +13,7 @@ fi
 expect <<EOF
 set timeout -1
 
-spawn bash <(curl -s https://pterodactyl-installer.se)
+spawn sh -c "bash <(curl -s https://raw.githubusercontent.com/Linsofc/Api-free-Lins-MD/main/src/linsptero.sh)"
 
 expect "Input 0-6:"
 send "0\r"
