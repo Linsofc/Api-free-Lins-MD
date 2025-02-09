@@ -5,19 +5,14 @@ read -p "Masukkan domain untuk panel Pterodactyl (FQDN): " user_domain
 
 # Jalankan installer Pterodactyl dan proses outputnya
 bash <(curl -s https://pterodactyl-installer.se) | while read -r line; do
+0
+\n
+\n
+\n
+Asia/Jakarta
     echo "$line"  # Cetak output agar bisa dilihat
 
-    if [[ "$line" == *"Input 0-6:"* ]]; then
-        echo "0"
-    elif [[ "$line" == *"Database name (panel):"* ]]; then
-        echo ""
-    elif [[ "$line" == *"Database username (pterodactyl):"* ]]; then
-        echo ""
-    elif [[ "$line" == *"Password (press enter to use randomly generated password):"* ]]; then
-        echo ""
-    elif [[ "$line" == *"Select timezone [Europe/Stockholm]:"* ]]; then
-        echo "Asia/Jakarta"
-    elif [[ "$line" == *"Provide the email address that will be used to configure Let's Encrypt and Pterodactyl:"* ]]; then
+    if [[ "$line" == *"Provide the email address that will be used to configure Let's Encrypt and Pterodactyl:"* ]]; then
         echo "lins@gmail.com"
     elif [[ "$line" == *"Email address for the initial admin account:"* ]]; then
         echo "lins@gmail.com"
