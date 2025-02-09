@@ -1,13 +1,18 @@
-#!/usr/bin/expect
-
-set timeout -1
+#!/bin/bash
 
 # Meminta input domain sebelum menjalankan instalasi
-puts -nonewline "Masukkan domain Anda: "
-flush stdout
-gets stdin domain
+read -p "Masukkan domain Anda: " domain
 
-# Menjalankan installer
+# Periksa apakah Expect terinstal
+if ! command -v expect &> /dev/null; then
+    echo "Expect belum terinstal. Menginstall sekarang..."
+    sudo apt update && sudo apt install expect -y
+fi
+
+# Menjalankan Expect untuk menangani input otomatis
+expect <<EOF
+set timeout -1
+
 spawn bash <(curl -s https://pterodactyl-installer.se)
 
 expect "Input 0-6:"
@@ -72,3 +77,4 @@ expect "Still assume SSL? (y/N):"
 send "y\r"
 
 expect eof
+EOF
